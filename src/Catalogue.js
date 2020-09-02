@@ -77,4 +77,39 @@ export default class Catalogue {
             throw new Error(e);
         });
     }
+    getVariations = (itemId) => {
+        return sellsy.api({
+			method: 'Catalogue.getVariations',
+			params: {
+				itemid: itemId,
+			},
+		})
+		.then((data) => {
+			if (data.error) {
+                throw new Error(data.error);
+			}
+			return Object.values(data.response);
+		})
+		.catch(e => {
+			throw new Error(e);
+		});
+    }
+    getVariation = (itemId, declId) => {
+        return sellsy.api({
+			method: 'Catalogue.getVariation',
+			params: {
+				declid: declId,
+				itemid: itemId,
+			},
+		})
+		.then((data) => {
+			if (data.error) {
+                throw new Error(data.error);
+			}
+			return data.response;
+		})
+		.catch(e => {
+            throw new Error(e);
+		});
+    }
 }
