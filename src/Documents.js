@@ -116,8 +116,8 @@ export default class Documents {
     return this.sellsy.api({
 			method: 'Document.getLinkedDocuments',
 			params: {
-				docid: docid,
-				doctype: doctype,
+				docid: docId,
+				doctype: docType,
 			},
 		})
 		.then((data) => {

@@ -54,8 +54,8 @@ var Documents = function () {
       return _this.sellsy.api({
         method: 'Document.getLinkedDocuments',
         params: {
-          docid: docid,
-          doctype: doctype
+          docid: docId,
+          doctype: docType
         }
       }).then(function (data) {
         if (data.error) {
