@@ -15,7 +15,7 @@ export default class AccountPrefs {
         this.sellsy = sellsy;
     }
     getCurrencies = () => {
-        return sellsy.api({
+        return this.sellsy.api({
             method: "AccountPrefs.getCurrencies",
             params: {},
         }).then((data) => {
@@ -28,7 +28,7 @@ export default class AccountPrefs {
       });
     }
     getCurrencyId = (currencyCode) => {
-        return sellsy.api({
+        return this.sellsy.api({
             method: "AccountPrefs.getCurrencies",
             params: {},
         }).then((data) => {

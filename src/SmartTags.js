@@ -5,7 +5,7 @@ export default class SmartTags {
         this.sellsy = sellsy;
     }
     getList = (category) => {
-        return sellsy.api({
+        return this.sellsy.api({
           method: "SmartTags.getList",
           params: {
             search: {

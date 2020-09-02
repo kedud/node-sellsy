@@ -13,16 +13,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SmartTags = function SmartTags(sellsy) {
+    var _this = this;
+
     _classCallCheck(this, SmartTags);
 
-    _initialiseProps.call(this);
-
-    this.sellsy = sellsy;
-};
-
-var _initialiseProps = function _initialiseProps() {
     this.getList = function (category) {
-        return sellsy.api({
+        return _this.sellsy.api({
             method: "SmartTags.getList",
             params: {
                 search: {
@@ -38,6 +34,8 @@ var _initialiseProps = function _initialiseProps() {
             throw new Error(e);
         });
     };
+
+    this.sellsy = sellsy;
 };
 
 exports.default = SmartTags;

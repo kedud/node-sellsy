@@ -43,7 +43,7 @@ export default class Customers {
     });
   }
   getOne = (clientId) => {
-    return sellsy.api({
+    return this.sellsy.api({
 			method: 'Client.getOne',
 			params: {
 				clientid: clientId,
@@ -60,7 +60,7 @@ export default class Customers {
 		});
   }
   getContact = (clientId, contactId) => {
-    return sellsy.api({
+    return this.sellsy.api({
 			method: 'Client.getContact',
 			params: {
 				clientid: clientId,
@@ -78,7 +78,7 @@ export default class Customers {
 		});
   }
   getBillingContact = (clientId) => {
-    return sellsy.api({
+    return this.sellsy.api({
 			method: 'Client.getBillingContact',
 			params: {
 				clientid: clientId,
@@ -95,7 +95,7 @@ export default class Customers {
 		});
   }
   addAddress = (clientId, address) => {
-    return sellsy.api({
+    return this.sellsy.api({
       method: "Client.addAddress",
       params: {
         clientid: clientId,

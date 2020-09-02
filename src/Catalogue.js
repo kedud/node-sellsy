@@ -15,7 +15,7 @@ export default class Catalogue {
         this.sellsy = sellsy;
     }
     getBarCodes = (type, itemId) => {
-        return sellsy.api({
+        return this.sellsy.api({
             method: 'Catalogue.getBarCodes',
             params: {
                 type: type,
@@ -33,7 +33,7 @@ export default class Catalogue {
         });
     }
     getBarCode = (type, itemId, declId) => {
-        return sellsy.api({
+        return this.sellsy.api({
             method: 'Catalogue.getBarCodes',
             params: {
                 type: type,
@@ -53,7 +53,7 @@ export default class Catalogue {
         });
     }
     getList = (type='item', tags, rateCategory, pagination=DEFAULT_GET_LIST_PAGINATION, order=DEFAULT_GET_LIST_ORDER) => {
-        return sellsy.api({
+        return this.sellsy.api({
             method: "Catalogue.getList",
             params: {
                 type: type,
@@ -78,7 +78,7 @@ export default class Catalogue {
         });
     }
     getVariations = (itemId) => {
-        return sellsy.api({
+        return this.sellsy.api({
 			method: 'Catalogue.getVariations',
 			params: {
 				itemid: itemId,
@@ -95,7 +95,7 @@ export default class Catalogue {
 		});
     }
     getVariation = (itemId, declId) => {
-        return sellsy.api({
+        return this.sellsy.api({
 			method: 'Catalogue.getVariation',
 			params: {
 				declid: declId,

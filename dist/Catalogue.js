@@ -23,16 +23,12 @@ var DEFAULT_GET_LIST_ORDER = {
 };
 
 var Catalogue = function Catalogue(sellsy) {
+    var _this = this;
+
     _classCallCheck(this, Catalogue);
 
-    _initialiseProps.call(this);
-
-    this.sellsy = sellsy;
-};
-
-var _initialiseProps = function _initialiseProps() {
     this.getBarCodes = function (type, itemId) {
-        return sellsy.api({
+        return _this.sellsy.api({
             method: 'Catalogue.getBarCodes',
             params: {
                 type: type,
@@ -49,7 +45,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.getBarCode = function (type, itemId, declId) {
-        return sellsy.api({
+        return _this.sellsy.api({
             method: 'Catalogue.getBarCodes',
             params: {
                 type: type,
@@ -76,7 +72,7 @@ var _initialiseProps = function _initialiseProps() {
         var pagination = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : DEFAULT_GET_LIST_PAGINATION;
         var order = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : DEFAULT_GET_LIST_ORDER;
 
-        return sellsy.api({
+        return _this.sellsy.api({
             method: "Catalogue.getList",
             params: {
                 type: type,
@@ -101,7 +97,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.getVariations = function (itemId) {
-        return sellsy.api({
+        return _this.sellsy.api({
             method: 'Catalogue.getVariations',
             params: {
                 itemid: itemId
@@ -117,7 +113,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.getVariation = function (itemId, declId) {
-        return sellsy.api({
+        return _this.sellsy.api({
             method: 'Catalogue.getVariation',
             params: {
                 declid: declId,
@@ -132,6 +128,8 @@ var _initialiseProps = function _initialiseProps() {
             throw new Error(e);
         });
     };
+
+    this.sellsy = sellsy;
 };
 
 exports.default = Catalogue;

@@ -13,16 +13,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Customers = function Customers(sellsy) {
-  _classCallCheck(this, Customers);
-
-  _initialiseProps.call(this);
-
-  this.udpate = this.create;
-  this.sellsy = sellsy;
-};
-
-var _initialiseProps = function _initialiseProps() {
   var _this = this;
+
+  _classCallCheck(this, Customers);
 
   this.create = function (data) {
     var method = data.clientid ? 'update' : 'create';
@@ -65,7 +58,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.getOne = function (clientId) {
-    return sellsy.api({
+    return _this.sellsy.api({
       method: 'Client.getOne',
       params: {
         clientid: clientId
@@ -81,7 +74,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.getContact = function (clientId, contactId) {
-    return sellsy.api({
+    return _this.sellsy.api({
       method: 'Client.getContact',
       params: {
         clientid: clientId,
@@ -98,7 +91,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.getBillingContact = function (clientId) {
-    return sellsy.api({
+    return _this.sellsy.api({
       method: 'Client.getBillingContact',
       params: {
         clientid: clientId
@@ -114,7 +107,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.addAddress = function (clientId, address) {
-    return sellsy.api({
+    return _this.sellsy.api({
       method: "Client.addAddress",
       params: {
         clientid: clientId,
@@ -129,6 +122,9 @@ var _initialiseProps = function _initialiseProps() {
       throw new Error(e);
     });
   };
+
+  this.udpate = this.create;
+  this.sellsy = sellsy;
 };
 
 exports.default = Customers;

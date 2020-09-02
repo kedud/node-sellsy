@@ -28,9 +28,45 @@ var DEFAULT_GET_LIST_ORDER = {
 
 var Documents = function () {
   function Documents(sellsy) {
+    var _this = this;
+
     _classCallCheck(this, Documents);
 
-    _initialiseProps.call(this);
+    this.getPublicLinkV2 = function (docType, docId) {
+      return _this.sellsy.api({
+        method: 'Document.getPublicLink_v2',
+        params: {
+          doctype: docType,
+          docid: docId
+        }
+      }).then(function (data) {
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        return "https://sellsy.com/" + data.response.pdf + "&display=Y";
+      }).catch(function (e) {
+        console.log(e);
+        throw new Error(e);
+      });
+    };
+
+    this.getLinkedDocuments = function (docType, docId) {
+      return _this.sellsy.api({
+        method: 'Document.getLinkedDocuments',
+        params: {
+          docid: docid,
+          doctype: doctype
+        }
+      }).then(function (data) {
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        var documents = Object.values(data.response.directChildren);
+        return documents;
+      }).catch(function (e) {
+        throw new Error(e);
+      });
+    };
 
     this.sellsy = sellsy;
   }
@@ -38,7 +74,7 @@ var Documents = function () {
   _createClass(Documents, [{
     key: 'create',
     value: function create(data) {
-      var _this = this;
+      var _this2 = this;
 
       var method = data.docid ? 'update' : 'create';
       return this.sellsy.api({
@@ -46,7 +82,7 @@ var Documents = function () {
         params: data
       }).then(function (result) {
         if (result.status === 'success') {
-          return _this.getById(data.document.doctype, result.response.doc_id);
+          return _this2.getById(data.document.doctype, result.response.doc_id);
         }
         throw new Error(_ERRORS2.default.DOCUMENT_CREATE_ERROR);
       }).catch(function (e) {
@@ -134,45 +170,5 @@ var Documents = function () {
 
   return Documents;
 }();
-
-var _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
-
-  this.getPublicLinkV2 = function (docType, docId) {
-    return _this2.sellsy.api({
-      method: 'Document.getPublicLink_v2',
-      params: {
-        doctype: docType,
-        docid: docId
-      }
-    }).then(function (data) {
-      if (data.error) {
-        throw new Error(data.error);
-      }
-      return "https://sellsy.com/" + data.response.pdf + "&display=Y";
-    }).catch(function (e) {
-      console.log(e);
-      throw new Error(e);
-    });
-  };
-
-  this.getLinkedDocuments = function (docType, docId) {
-    return sellsy.api({
-      method: 'Document.getLinkedDocuments',
-      params: {
-        docid: docid,
-        doctype: doctype
-      }
-    }).then(function (data) {
-      if (data.error) {
-        throw new Error(data.error);
-      }
-      var documents = Object.values(data.response.directChildren);
-      return documents;
-    }).catch(function (e) {
-      throw new Error(e);
-    });
-  };
-};
 
 exports.default = Documents;

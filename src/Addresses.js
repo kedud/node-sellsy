@@ -5,7 +5,7 @@ export default class Addresses {
         this.sellsy = sellsy;
     }
     getList = (linkedIDs) => {
-        return sellsy.api({
+        return this.sellsy.api({
             method: "Addresses.getList",
             params: {
                 search: {

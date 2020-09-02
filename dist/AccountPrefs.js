@@ -25,16 +25,12 @@ var DEFAULT_GET_LIST_ORDER = {
 };
 
 var AccountPrefs = function AccountPrefs(sellsy) {
+    var _this = this;
+
     _classCallCheck(this, AccountPrefs);
 
-    _initialiseProps.call(this);
-
-    this.sellsy = sellsy;
-};
-
-var _initialiseProps = function _initialiseProps() {
     this.getCurrencies = function () {
-        return sellsy.api({
+        return _this.sellsy.api({
             method: "AccountPrefs.getCurrencies",
             params: {}
         }).then(function (data) {
@@ -48,7 +44,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.getCurrencyId = function (currencyCode) {
-        return sellsy.api({
+        return _this.sellsy.api({
             method: "AccountPrefs.getCurrencies",
             params: {}
         }).then(function (data) {
@@ -89,6 +85,8 @@ var _initialiseProps = function _initialiseProps() {
             throw new Error(e);
         });
     };
+
+    this.sellsy = sellsy;
 };
 
 exports.default = AccountPrefs;

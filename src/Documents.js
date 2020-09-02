@@ -113,7 +113,7 @@ export default class Documents {
     });
   }
   getLinkedDocuments = (docType, docId) => {
-    return sellsy.api({
+    return this.sellsy.api({
 			method: 'Document.getLinkedDocuments',
 			params: {
 				docid: docid,
