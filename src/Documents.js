@@ -91,8 +91,44 @@ export default class Documents {
     }).then(data => {
       return data.response
     }).catch(e => {
-      console.log(e)
+      console.log(e);
       throw new Error(ERRORS.DOCUMENT_NOT_FOUND);
     });
+  }
+  getPublicLinkV2 = (docType, docId) => {
+    return this.sellsy.api({
+      method: 'Document.getPublicLink_v2',
+      params: {
+        doctype: docType,
+        docid: docId,
+      },
+    }).then((data) => {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      return "https://sellsy.com/" + data.response.pdf + "&display=Y";
+    }).catch((e) => {
+      console.log(e)
+      throw new Error(e);
+    });
+  }
+  getLinkedDocument = (docType, docId) => {
+    return sellsy.api({
+			method: 'Document.getLinkedDocuments',
+			params: {
+				docid: docid,
+				doctype: doctype,
+			},
+		})
+		.then((data) => {
+			if (data.error) {
+				throw new Error(data.error);
+			}
+			let documents = Object.values(data.response.directChildren);
+			return documents;
+		})
+		.catch(e => {
+			throw new Error(e);
+		});
   }
 }

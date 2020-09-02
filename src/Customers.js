@@ -42,4 +42,72 @@ export default class Customers {
      throw new Error(ERRORS.CUSTOMER_NOT_FOUND);
     });
   }
+  getOne = (clientId) => {
+    return sellsy.api({
+			method: 'Client.getOne',
+			params: {
+				clientid: clientId,
+			},
+		})
+		.then((data) => {
+			if (data.error) {
+				throw new Error(data.error);
+			}
+			return data.response.client;
+		})
+		.catch(e => {
+			throw new Error(e);
+		});
+  }
+  getContact = (clientId, contactId) => {
+    return sellsy.api({
+			method: 'Client.getContact',
+			params: {
+				clientid: clientId,
+				contactid: contactId,
+			},
+		})
+		.then((data) => {
+			if (data.error) {
+				throw new Error(data.error);
+			}
+			return data.response;
+		})
+		.catch(e => {
+      throw new Error(e);
+		});
+  }
+  getBillingContact = (clientId) => {
+    return sellsy.api({
+			method: 'Client.getBillingContact',
+			params: {
+				clientid: clientId,
+			},
+		})
+		.then((data) => {
+			if (data.error) {
+				throw new Error(data.error);
+			}
+			return data.response;
+		})
+		.catch(e => {
+			throw new Error(e);
+		});
+  }
+  addAddress = (clientId, address) => {
+    return sellsy.api({
+      method: "Client.addAddress",
+      params: {
+        clientid: clientId,
+        address: address,
+      },
+    }).then((data) => {
+      if (data.error) {
+				throw new Error(data.error);
+			}
+      return data.response;
+    }).catch(e => {
+      throw new Error(e);
+    });
+  }
 }
