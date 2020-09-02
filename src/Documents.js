@@ -112,7 +112,7 @@ export default class Documents {
       throw new Error(e);
     });
   }
-  getLinkedDocument = (docType, docId) => {
+  getLinkedDocuments = (docType, docId) => {
     return sellsy.api({
 			method: 'Document.getLinkedDocuments',
 			params: {
