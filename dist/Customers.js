@@ -13,9 +13,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Customers = function Customers(sellsy) {
-  var _this = this;
-
   _classCallCheck(this, Customers);
+
+  _initialiseProps.call(this);
+
+  this.udpate = this.create;
+  this.sellsy = sellsy;
+};
+
+var _initialiseProps = function _initialiseProps() {
+  var _this = this;
 
   this.create = function (data) {
     var method = data.clientid ? 'update' : 'create';
@@ -57,8 +64,71 @@ var Customers = function Customers(sellsy) {
     });
   };
 
-  this.udpate = this.create;
-  this.sellsy = sellsy;
+  this.getOne = function (clientId) {
+    return sellsy.api({
+      method: 'Client.getOne',
+      params: {
+        clientid: clientId
+      }
+    }).then(function (data) {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      return data.response.client;
+    }).catch(function (e) {
+      throw new Error(e);
+    });
+  };
+
+  this.getContact = function (clientId, contactId) {
+    return sellsy.api({
+      method: 'Client.getContact',
+      params: {
+        clientid: clientId,
+        contactid: contactId
+      }
+    }).then(function (data) {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      return data.response;
+    }).catch(function (e) {
+      throw new Error(e);
+    });
+  };
+
+  this.getBillingContact = function (clientId) {
+    return sellsy.api({
+      method: 'Client.getBillingContact',
+      params: {
+        clientid: clientId
+      }
+    }).then(function (data) {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      return data.response;
+    }).catch(function (e) {
+      throw new Error(e);
+    });
+  };
+
+  this.addAddress = function (clientId, address) {
+    return sellsy.api({
+      method: "Client.addAddress",
+      params: {
+        clientid: clientId,
+        address: address
+      }
+    }).then(function (data) {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      return data.response;
+    }).catch(function (e) {
+      throw new Error(e);
+    });
+  };
 };
 
 exports.default = Customers;
