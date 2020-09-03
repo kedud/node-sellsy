@@ -12,6 +12,26 @@ var _Documents = require('./Documents');
 
 var _Documents2 = _interopRequireDefault(_Documents);
 
+var _Addresses = require('./Addresses');
+
+var _Addresses2 = _interopRequireDefault(_Addresses);
+
+var _Catalogue = require('./Catalogue');
+
+var _Catalogue2 = _interopRequireDefault(_Catalogue);
+
+var _SmartTags = require('./SmartTags');
+
+var _SmartTags2 = _interopRequireDefault(_SmartTags);
+
+var _AccountPrefs = require('./AccountPrefs');
+
+var _AccountPrefs2 = _interopRequireDefault(_AccountPrefs);
+
+var _Accountdatas = require('../dist/Accountdatas');
+
+var _Accountdatas2 = _interopRequireDefault(_Accountdatas);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var OAuth = require('oauth');
@@ -35,6 +55,11 @@ function Sellsy() {
   this.endPoint = endPoint;
   this.customers = new _Customers2.default(this);
   this.documents = new _Documents2.default(this);
+  this.addresses = new _Addresses2.default(this);
+  this.catalogue = new _Catalogue2.default(this);
+  this.smartTags = new _SmartTags2.default(this);
+  this.accountPrefs = new _AccountPrefs2.default(this);
+  this.accountdatas = new _Accountdatas2.default(this);
 }
 
 Sellsy.prototype.api = function () {

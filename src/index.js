@@ -2,6 +2,11 @@ var OAuth = require('oauth');
 
 import Customers from './Customers';
 import Documents from './Documents';
+import Addresses from './Addresses';
+import Catalogue from './Catalogue';
+import SmartTags from './SmartTags';
+import AccountPrefs from './AccountPrefs';
+import Accountdatas from '../dist/Accountdatas';
 
 const DEFAULT_ENDPOINT = 'https://apifeed.sellsy.com/0'
 
@@ -17,6 +22,11 @@ function Sellsy({ creds = {}, endPoint = DEFAULT_ENDPOINT  } = {}) {
   this.endPoint = endPoint;
   this.customers = new Customers(this);
   this.documents = new Documents(this);
+  this.addresses = new Addresses(this);
+  this.catalogue = new Catalogue(this);
+  this.smartTags = new SmartTags(this);
+  this.accountPrefs = new AccountPrefs(this);
+  this.accountdatas = new Accountdatas(this);
 }
 
 Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {}} = {}) {
