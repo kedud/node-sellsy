@@ -22,6 +22,11 @@ var DEFAULT_GET_LIST_ORDER = {
     order: 'item_name'
 };
 
+var TYPES = {
+    item: 'item',
+    service: 'service'
+};
+
 var Catalogue = function Catalogue(sellsy) {
     var _this = this;
 
@@ -35,11 +40,13 @@ var Catalogue = function Catalogue(sellsy) {
                 id: itemId
             }
         }).then(function (data) {
+            console.log(data);
             if (data.error) {
                 throw new Error(data.error);
             }
             return Object.values(data.response);
         }).catch(function (e) {
+            console.log(e);
             throw new Error(e);
         });
     };
@@ -66,7 +73,7 @@ var Catalogue = function Catalogue(sellsy) {
     };
 
     this.getList = function () {
-        var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'item';
+        var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _this.TYPES.item;
         var tags = arguments[1];
         var rateCategory = arguments[2];
         var pagination = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : DEFAULT_GET_LIST_PAGINATION;
@@ -90,7 +97,7 @@ var Catalogue = function Catalogue(sellsy) {
             if (data.error) {
                 throw new Error(data.error);
             }
-            return Object.entries(data.response.result);
+            return Object.values(data.response.result);
         }).catch(function (e) {
             throw new Error(e);
         });
@@ -130,6 +137,7 @@ var Catalogue = function Catalogue(sellsy) {
     };
 
     this.sellsy = sellsy;
+    this.TYPES = TYPES;
 };
 
 exports.default = Catalogue;

@@ -32,6 +32,10 @@ var _Accountdatas = require('../dist/Accountdatas');
 
 var _Accountdatas2 = _interopRequireDefault(_Accountdatas);
 
+var _CustomFields = require('./CustomFields');
+
+var _CustomFields2 = _interopRequireDefault(_CustomFields);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var OAuth = require('oauth');
@@ -60,6 +64,7 @@ function Sellsy() {
   this.smartTags = new _SmartTags2.default(this);
   this.accountPrefs = new _AccountPrefs2.default(this);
   this.accountdatas = new _Accountdatas2.default(this);
+  this.customFields = new _CustomFields2.default(this);
 }
 
 Sellsy.prototype.api = function () {

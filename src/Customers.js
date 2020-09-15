@@ -106,7 +106,7 @@ export default class Customers {
 				throw new Error(data.error);
 			}
       return data.response;
-    }).catch(e => {
+    }).catch(e => { 
       throw new Error(e);
     });
   }

@@ -7,6 +7,7 @@ import Catalogue from './Catalogue';
 import SmartTags from './SmartTags';
 import AccountPrefs from './AccountPrefs';
 import Accountdatas from '../dist/Accountdatas';
+import CustomFields from './CustomFields';
 
 const DEFAULT_ENDPOINT = 'https://apifeed.sellsy.com/0'
 
@@ -27,6 +28,7 @@ function Sellsy({ creds = {}, endPoint = DEFAULT_ENDPOINT  } = {}) {
   this.smartTags = new SmartTags(this);
   this.accountPrefs = new AccountPrefs(this);
   this.accountdatas = new Accountdatas(this);
+  this.customFields = new CustomFields(this);
 }
 
 Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {}} = {}) {

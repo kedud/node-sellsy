@@ -10,9 +10,15 @@ const DEFAULT_GET_LIST_ORDER = {
     order: 'item_name'
 }
 
+const TYPES = {
+    item: 'item',
+    service: 'service',
+}
+
 export default class Catalogue {
     constructor(sellsy) {
         this.sellsy = sellsy;
+        this.TYPES = TYPES;
     }
     getBarCodes = (type, itemId) => {
         return this.sellsy.api({
@@ -23,12 +29,14 @@ export default class Catalogue {
             },
         })
         .then((data) => {
+            console.log(data);
             if (data.error) {
                 throw new Error(data.error);
             }
             return Object.values(data.response);
         })
         .catch(e => {
+            console.log(e);
             throw new Error(e);
         });
     }
@@ -52,7 +60,7 @@ export default class Catalogue {
             throw new Error(e);
         });
     }
-    getList = (type='item', tags, rateCategory, pagination=DEFAULT_GET_LIST_PAGINATION, order=DEFAULT_GET_LIST_ORDER) => {
+    getList = (type=this.TYPES.item, tags, rateCategory, pagination=DEFAULT_GET_LIST_PAGINATION, order=DEFAULT_GET_LIST_ORDER) => {
         return this.sellsy.api({
             method: "Catalogue.getList",
             params: {
@@ -72,7 +80,7 @@ export default class Catalogue {
             if (data.error) {
                 throw new Error(data.error);
             }
-            return Object.entries(data.response.result);
+            return Object.values(data.response.result);
         }).catch(e => {
             throw new Error(e);
         });

@@ -26,6 +26,36 @@ var DEFAULT_GET_LIST_ORDER = {
   order: 'doc_displayedDate'
 };
 
+var STEPS = {
+  draft: 'draft',
+  sent: 'sent',
+  read: 'read',
+  accepted: 'accepted',
+  expired: 'expired',
+  advanced: 'advanced',
+  partialinvoiced: 'partialinvoiced',
+  invoiced: 'invoiced',
+  cancelled: 'cancelled',
+  paid: 'paid'
+};
+
+var DELIVERY_STEPS = {
+  none: 'none',
+  wait: 'wait',
+  picking: 'picking',
+  partialsent: 'partialsent',
+  sent: 'sent'
+};
+
+var TYPES = {
+  invoice: 'invoice',
+  estimate: 'estimate',
+  creditnote: 'creditnote',
+  proforma: 'proforma',
+  order: 'order',
+  delivery: 'delivery'
+};
+
 var Documents = function () {
   function Documents(sellsy) {
     var _this = this;
@@ -68,7 +98,69 @@ var Documents = function () {
       });
     };
 
+    this.updateStep = function (docType, docId, step) {
+      return _this.sellsy.api({
+        method: "Document.updateStep",
+        params: {
+          docid: docId,
+          document: { doctype: docType, step: step }
+        }
+      }).then(function (data) {
+        console.log('updateStep', data);
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        console.log(data);
+        return data;
+      }).catch(function (e) {
+        throw new Error(e);
+      });
+    };
+
+    this.updateDeliveryStep = function (docId, step) {
+      return _this.sellsy.api({
+        method: "Document.updateDeliveryStep",
+        params: {
+          docid: docId,
+          document: { step: step }
+        }
+      }).then(function (data) {
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        console.log(data);
+        return data;
+      }).catch(function (e) {
+        throw new Error(e);
+      });
+    };
+
+    this.createPayment = function (docType, docId, amount, medium, date) {
+      return _this.sellsy.api({
+        method: "Document.createPayment",
+        params: {
+          payment: {
+            date: date,
+            amount: amount,
+            medium: medium,
+            doctype: docType,
+            docid: docId
+          }
+        }
+      }).then(function (data) {
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        return data;
+      }).catch(function (e) {
+        throw new Error(e);
+      });
+    };
+
     this.sellsy = sellsy;
+    this.STEPS = STEPS;
+    this.DELIVERY_STEPS = DELIVERY_STEPS;
+    this.TYPES = TYPES;
   }
 
   _createClass(Documents, [{
@@ -81,10 +173,11 @@ var Documents = function () {
         method: 'Document.' + method,
         params: data
       }).then(function (result) {
-        if (result.status === 'success') {
-          return _this2.getById(data.document.doctype, result.response.doc_id);
+        if (result.error) {
+          console.log(result.error);
+          throw new Error(result.error);
         }
-        throw new Error(_ERRORS2.default.DOCUMENT_CREATE_ERROR);
+        return _this2.getById(data.document.doctype, result.response.doc_id);
       }).catch(function (e) {
         console.log(e);
         throw new Error(e);

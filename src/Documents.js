@@ -1,4 +1,3 @@
-
 import ERRORS from './ERRORS';
 
 const DEFAULT_GET_LIST_PAGINATION = {
@@ -11,9 +10,43 @@ const DEFAULT_GET_LIST_ORDER = {
   order: 'doc_displayedDate'
 }
 
+const STEPS = {
+  draft: 'draft',
+  sent: 'sent',
+  read: 'read',
+  accepted: 'accepted',
+  expired: 'expired',
+  advanced: 'advanced',
+  partialinvoiced: 'partialinvoiced',
+  invoiced: 'invoiced',
+  cancelled: 'cancelled',
+  paid: 'paid',
+}
+
+const DELIVERY_STEPS = {
+  none: 'none', 
+  wait: 'wait',
+  picking: 'picking',
+  partialsent: 'partialsent',
+  sent: 'sent',
+}
+
+const TYPES = {
+  invoice: 'invoice',
+  estimate: 'estimate',
+  creditnote: 'creditnote',
+  proforma: 'proforma',
+  order: 'order',
+  delivery: 'delivery',
+}
+
+
 export default class Documents {
   constructor(sellsy) {
     this.sellsy = sellsy;
+    this.STEPS = STEPS;
+    this.DELIVERY_STEPS = DELIVERY_STEPS;
+    this.TYPES = TYPES;
   }
   create(data) {
     let method = data.docid ? 'update':'create';
@@ -21,14 +54,15 @@ export default class Documents {
       method: `Document.${method}`,
       params: data
     }).then(result => {
-      if (result.status === 'success') {
-       return this.getById(data.document.doctype, result.response.doc_id);
+      if (result.error) {
+        console.log(result.error)
+        throw new Error(result.error);
       }
-      throw new Error(ERRORS.DOCUMENT_CREATE_ERROR);
+      return this.getById(data.document.doctype, result.response.doc_id);
    }).catch(e => {
       console.log(e)
       throw new Error(e);
-   })
+   });
   }
   updateStep(docType, docId, step) {
     return this.sellsy.api({
@@ -126,6 +160,65 @@ export default class Documents {
 			}
 			let documents = Object.values(data.response.directChildren);
 			return documents;
+		})
+		.catch(e => {
+			throw new Error(e);
+		});
+  }
+  updateStep = (docType, docId, step) => {
+    return this.sellsy.api({
+      method: "Document.updateStep",
+      params: {
+        docid: docId,
+        document: { doctype: docType, step: step },
+      },
+    }).then((data) => {
+      console.log('updateStep', data);
+			if (data.error) {
+				throw new Error(data.error);
+      }
+      console.log(data);
+			return data;
+		})
+		.catch(e => {
+			throw new Error(e);
+		});
+  }
+  updateDeliveryStep = (docId, step) => {
+    return this.sellsy.api({
+      method: "Document.updateDeliveryStep",
+      params: {
+        docid: docId,
+        document: { step: step },
+      },
+    }).then((data) => {
+			if (data.error) {
+				throw new Error(data.error);
+      }
+      console.log(data);
+			return data;
+		})
+		.catch(e => {
+			throw new Error(e);
+		});
+  }
+  createPayment = (docType, docId, amount, medium, date) => {
+    return this.sellsy.api({
+      method: "Document.createPayment",
+      params: {
+        payment: {
+          date: date,
+          amount: amount,
+          medium: medium,
+          doctype: docType,
+          docid: docId,
+        },
+      },
+    }).then((data) => {
+			if (data.error) {
+				throw new Error(data.error);
+      }
+			return data;
 		})
 		.catch(e => {
 			throw new Error(e);
