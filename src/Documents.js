@@ -81,24 +81,24 @@ export default class Documents {
       throw new Error(ERRORS.DOCUMENT_UPDATESTEP_ERROR);
     });
   }
-  createPayment(docType, docId, paymentData) {
-    return this.sellsy.api({
-      method: 'Document.createPayment',
-      params: {
-        payment: {
-          doctype: docType,
-          docid: docId,
-          ...paymentData
-        }
-      }
-    }).then(data => {
-      console.log(data);
-      return data.response;
-    }).catch(e => {
-      console.log(e)
-      throw new Error(ERRORS.DOCUMENT_CREATEPAYMENT_ERROR);
-    });
-  }
+  // createPayment(docType, docId, paymentData) {
+  //   return this.sellsy.api({
+  //     method: 'Document.createPayment',
+  //     params: {
+  //       payment: {
+  //         doctype: docType,
+  //         docid: docId,
+  //         ...paymentData
+  //       }
+  //     }
+  //   }).then(data => {
+  //     console.log(data);
+  //     return data.response;
+  //   }).catch(e => {
+  //     console.log(e)
+  //     throw new Error(ERRORS.DOCUMENT_CREATEPAYMENT_ERROR);
+  //   });
+  // }
   getById(docType, docId) {
     return this.sellsy.api({
       method: 'Document.getOne',
@@ -216,6 +216,7 @@ export default class Documents {
         },
       },
     }).then((data) => {
+      console.log('createPayment', data);
 			if (data.error) {
 				throw new Error(data.error);
       }

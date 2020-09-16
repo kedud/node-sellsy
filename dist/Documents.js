@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _ERRORS = require('./ERRORS');
@@ -148,6 +146,7 @@ var Documents = function () {
           }
         }
       }).then(function (data) {
+        console.log('createPayment', data);
         if (data.error) {
           throw new Error(data.error);
         }
@@ -202,25 +201,25 @@ var Documents = function () {
         throw new Error(_ERRORS2.default.DOCUMENT_UPDATESTEP_ERROR);
       });
     }
-  }, {
-    key: 'createPayment',
-    value: function createPayment(docType, docId, paymentData) {
-      return this.sellsy.api({
-        method: 'Document.createPayment',
-        params: {
-          payment: _extends({
-            doctype: docType,
-            docid: docId
-          }, paymentData)
-        }
-      }).then(function (data) {
-        console.log(data);
-        return data.response;
-      }).catch(function (e) {
-        console.log(e);
-        throw new Error(_ERRORS2.default.DOCUMENT_CREATEPAYMENT_ERROR);
-      });
-    }
+    // createPayment(docType, docId, paymentData) {
+    //   return this.sellsy.api({
+    //     method: 'Document.createPayment',
+    //     params: {
+    //       payment: {
+    //         doctype: docType,
+    //         docid: docId,
+    //         ...paymentData
+    //       }
+    //     }
+    //   }).then(data => {
+    //     console.log(data);
+    //     return data.response;
+    //   }).catch(e => {
+    //     console.log(e)
+    //     throw new Error(ERRORS.DOCUMENT_CREATEPAYMENT_ERROR);
+    //   });
+    // }
+
   }, {
     key: 'getById',
     value: function getById(docType, docId) {
