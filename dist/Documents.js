@@ -134,6 +134,7 @@ var Documents = function () {
     };
 
     this.createPayment = function (docType, docId, amount, medium, date) {
+      console.log('createPayment date: ', date);
       return _this.sellsy.api({
         method: "Document.createPayment",
         params: {

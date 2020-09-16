@@ -204,6 +204,7 @@ export default class Documents {
 		});
   }
   createPayment = (docType, docId, amount, medium, date) => {
+    console.log('createPayment date: ', date);
     return this.sellsy.api({
       method: "Document.createPayment",
       params: {
