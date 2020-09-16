@@ -92,7 +92,8 @@ export default class Documents {
         }
       }
     }).then(data => {
-      return data.response
+      console.log(data);
+      return data.response;
     }).catch(e => {
       console.log(e)
       throw new Error(ERRORS.DOCUMENT_CREATEPAYMENT_ERROR);
