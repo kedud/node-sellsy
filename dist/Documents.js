@@ -214,6 +214,7 @@ var Documents = function () {
           }, paymentData)
         }
       }).then(function (data) {
+        console.log(data);
         return data.response;
       }).catch(function (e) {
         console.log(e);
