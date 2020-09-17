@@ -134,7 +134,6 @@ var Documents = function () {
     };
 
     this.createPayment = function (docType, docId, amount, medium, date) {
-      console.log('createPayment date: ', date);
       return _this.sellsy.api({
         method: "Document.createPayment",
         params: {
@@ -147,7 +146,6 @@ var Documents = function () {
           }
         }
       }).then(function (data) {
-        console.log('createPayment', data);
         if (data.error) {
           throw new Error(data.error);
         }

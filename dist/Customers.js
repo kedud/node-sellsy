@@ -23,6 +23,7 @@ var Customers = function Customers(sellsy) {
       method: 'Client.' + method,
       params: data
     }).then(function (data) {
+      console.log(data);
       if (data.status === 'success') {
         // fetch created customer data
         return _this.sellsy.api({

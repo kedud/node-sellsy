@@ -12,6 +12,7 @@ export default class Customers {
       method: `Client.${method}`,
       params: data
     }).then(data => {
+      console.log(data);
      if (data.status === 'success') {
         // fetch created customer data
         return this.sellsy.api({

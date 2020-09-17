@@ -204,7 +204,6 @@ export default class Documents {
 		});
   }
   createPayment = (docType, docId, amount, medium, date) => {
-    console.log('createPayment date: ', date);
     return this.sellsy.api({
       method: "Document.createPayment",
       params: {
@@ -217,7 +216,6 @@ export default class Documents {
         },
       },
     }).then((data) => {
-      console.log('createPayment', data);
 			if (data.error) {
 				throw new Error(data.error);
       }
