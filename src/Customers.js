@@ -75,6 +75,7 @@ export default class Customers {
 			return data.response;
 		})
 		.catch(e => {
+      console.error(e);
       throw new Error(e);
 		});
   }

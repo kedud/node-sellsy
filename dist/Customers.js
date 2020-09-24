@@ -87,6 +87,7 @@ var Customers = function Customers(sellsy) {
       }
       return data.response;
     }).catch(function (e) {
+      console.error(e);
       throw new Error(e);
     });
   };

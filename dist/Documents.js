@@ -155,6 +155,23 @@ var Documents = function () {
       });
     };
 
+    this.getPaymentList = function (docType, docId) {
+      return _this.sellsy.api({
+        method: "Document.getPaymentList",
+        params: {
+          doctype: docType,
+          docid: docId
+        }
+      }).then(function (data) {
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        return Object.values(data.response);
+      }).catch(function (e) {
+        throw new Error(e);
+      });
+    };
+
     this.sellsy = sellsy;
     this.STEPS = STEPS;
     this.DELIVERY_STEPS = DELIVERY_STEPS;

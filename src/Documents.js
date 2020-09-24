@@ -225,4 +225,21 @@ export default class Documents {
 			throw new Error(e);
 		});
   }
+  getPaymentList = (docType, docId) => {
+    return this.sellsy.api({
+      method: "Document.getPaymentList",
+      params: {
+        doctype: docType,
+        docid: docId,
+      },
+    }).then((data) => {
+			if (data.error) {
+				throw new Error(data.error);
+      }
+			return Object.values(data.response);
+		})
+		.catch(e => {
+			throw new Error(e);
+		});
+  }
 }
