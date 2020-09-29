@@ -127,7 +127,7 @@ export default class Documents {
       if (data.error) {
 				throw new Error(data.error);
 			}
-			let documents = Object.values(data.response.directChildren);
+			let documents = Object.values(data.response);
 			return documents;
     }).catch(e => {
       console.log(e);
