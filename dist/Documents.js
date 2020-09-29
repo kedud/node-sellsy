@@ -269,7 +269,11 @@ var Documents = function () {
           includePayments: includePayments
         }
       }).then(function (data) {
-        return data.response;
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        var documents = Object.values(data.response.directChildren);
+        return documents;
       }).catch(function (e) {
         console.log(e);
         throw new Error(_ERRORS2.default.DOCUMENT_NOT_FOUND);

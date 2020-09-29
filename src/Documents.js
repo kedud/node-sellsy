@@ -124,7 +124,11 @@ export default class Documents {
         includePayments
       }
     }).then(data => {
-      return data.response
+      if (data.error) {
+				throw new Error(data.error);
+			}
+			let documents = Object.values(data.response.directChildren);
+			return documents;
     }).catch(e => {
       console.log(e);
       throw new Error(ERRORS.DOCUMENT_NOT_FOUND);
