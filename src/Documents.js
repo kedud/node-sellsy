@@ -21,6 +21,9 @@ const STEPS = {
   invoiced: 'invoiced',
   cancelled: 'cancelled',
   paid: 'paid',
+  stored: 'stored',
+  partialspend: 'partialspend',
+  spent: 'spent',
 }
 
 const DELIVERY_STEPS = {
@@ -127,7 +130,7 @@ export default class Documents {
       if (data.error) {
 				throw new Error(data.error);
 			}
-			let documents = Object.values(data.response);
+			let documents = Object.values(data.response.result);
 			return documents;
     }).catch(e => {
       console.log(e);

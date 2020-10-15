@@ -34,7 +34,10 @@ var STEPS = {
   partialinvoiced: 'partialinvoiced',
   invoiced: 'invoiced',
   cancelled: 'cancelled',
-  paid: 'paid'
+  paid: 'paid',
+  stored: 'stored',
+  partialspend: 'partialspend',
+  spent: 'spent'
 };
 
 var DELIVERY_STEPS = {
@@ -272,7 +275,7 @@ var Documents = function () {
         if (data.error) {
           throw new Error(data.error);
         }
-        var documents = Object.values(data.response.directChildren);
+        var documents = Object.values(data.response.result);
         return documents;
       }).catch(function (e) {
         console.log(e);
