@@ -21,10 +21,10 @@ export default class SmartTags {
             throw new Error(e);
         });
     }
-    
+
     assign = (linkedtype, linkedid, tags) => {
       return this.sellsy.api({
-        method: "SmartTags.getList",
+        method: "SmartTags.assign",
         params: {
           linkedtype: linkedtype,
           linkedid: linkedid,

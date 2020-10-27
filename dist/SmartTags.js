@@ -37,7 +37,7 @@ var SmartTags = function SmartTags(sellsy) {
 
     this.assign = function (linkedtype, linkedid, tags) {
         return _this.sellsy.api({
-            method: "SmartTags.getList",
+            method: "SmartTags.assign",
             params: {
                 linkedtype: linkedtype,
                 linkedid: linkedid,
