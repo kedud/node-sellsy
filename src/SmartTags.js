@@ -21,4 +21,22 @@ export default class SmartTags {
             throw new Error(e);
         });
     }
+    
+    assign = (linkedtype, linkedid, tags) => {
+      return this.sellsy.api({
+        method: "SmartTags.getList",
+        params: {
+          linkedtype: linkedtype,
+          linkedid: linkedid,
+          tags: tags.join(','),
+        },
+      }).then((data) => {
+          if (data.error) {
+              throw new Error(data.error);
+          }
+          return data.response;
+      }).catch((e) => {
+          throw new Error(e);
+      });
+    }
 }

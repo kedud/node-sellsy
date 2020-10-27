@@ -35,6 +35,24 @@ var SmartTags = function SmartTags(sellsy) {
         });
     };
 
+    this.assign = function (linkedtype, linkedid, tags) {
+        return _this.sellsy.api({
+            method: "SmartTags.getList",
+            params: {
+                linkedtype: linkedtype,
+                linkedid: linkedid,
+                tags: tags.join(',')
+            }
+        }).then(function (data) {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            return data.response;
+        }).catch(function (e) {
+            throw new Error(e);
+        });
+    };
+
     this.sellsy = sellsy;
 };
 
