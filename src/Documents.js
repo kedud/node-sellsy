@@ -210,7 +210,7 @@ export default class Documents {
 			throw new Error(e);
 		});
   }
-  createPayment = (docType, docId, amount, medium, date) => {
+  createPayment = (docType, docId, amount, medium, date, ident) => {
     return this.sellsy.api({
       method: "Document.createPayment",
       params: {
@@ -220,6 +220,7 @@ export default class Documents {
           medium: medium,
           doctype: docType,
           docid: docId,
+          ident: ident,
         },
       },
     }).then((data) => {

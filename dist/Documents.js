@@ -136,7 +136,7 @@ var Documents = function () {
       });
     };
 
-    this.createPayment = function (docType, docId, amount, medium, date) {
+    this.createPayment = function (docType, docId, amount, medium, date, ident) {
       return _this.sellsy.api({
         method: "Document.createPayment",
         params: {
@@ -145,7 +145,8 @@ var Documents = function () {
             amount: amount,
             medium: medium,
             doctype: docType,
-            docid: docId
+            docid: docId,
+            ident: ident
           }
         }
       }).then(function (data) {
