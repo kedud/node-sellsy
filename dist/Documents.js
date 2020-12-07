@@ -35,6 +35,7 @@ var STEPS = {
   invoiced: 'invoiced',
   cancelled: 'cancelled',
   paid: 'paid',
+  payinprogress: ' payinprogress',
   stored: 'stored',
   partialspend: 'partialspend',
   spent: 'spent'
