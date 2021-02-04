@@ -14,6 +14,7 @@ export default class Accountdatas {
     constructor(sellsy) {
         this.sellsy = sellsy;
     }
+    
     getTaxes = () => {
         return sellsy.api({
             method: "Accountdatas.getTaxes",
