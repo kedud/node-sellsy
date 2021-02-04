@@ -23,16 +23,12 @@ var DEFAULT_GET_LIST_ORDER = {
 };
 
 var Accountdatas = function Accountdatas(sellsy) {
+    var _this = this;
+
     _classCallCheck(this, Accountdatas);
 
-    _initialiseProps.call(this);
-
-    this.sellsy = sellsy;
-};
-
-var _initialiseProps = function _initialiseProps() {
     this.getTaxes = function () {
-        return sellsy.api({
+        return _this.sellsy.api({
             method: "Accountdatas.getTaxes",
             params: {}
         }).then(function (data) {
@@ -46,7 +42,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.getRateCategory = function (rcid) {
-        return sellsy.api({
+        return _this.sellsy.api({
             method: "Accountdatas.getRateCategory",
             params: {
                 id: rcid
@@ -60,6 +56,8 @@ var _initialiseProps = function _initialiseProps() {
             throw new Error(e);
         });
     };
+
+    this.sellsy = sellsy;
 };
 
 exports.default = Accountdatas;

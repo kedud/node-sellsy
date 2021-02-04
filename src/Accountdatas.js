@@ -14,9 +14,9 @@ export default class Accountdatas {
     constructor(sellsy) {
         this.sellsy = sellsy;
     }
-    
+
     getTaxes = () => {
-        return sellsy.api({
+        return this.sellsy.api({
             method: "Accountdatas.getTaxes",
             params: {},
         }).then((data) => {
@@ -30,7 +30,7 @@ export default class Accountdatas {
     }
 
     getRateCategory = (rcid) => {
-        return sellsy.api({
+        return this.sellsy.api({
             method: "Accountdatas.getRateCategory",
             params: {
                 id: rcid,
