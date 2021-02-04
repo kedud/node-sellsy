@@ -44,6 +44,22 @@ var _initialiseProps = function _initialiseProps() {
             throw new Error(e);
         });
     };
+
+    this.getRateCategory = function (rcid) {
+        return sellsy.api({
+            method: "Accountdatas.getRateCategory",
+            params: {
+                id: rcid
+            }
+        }).then(function (data) {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            return data.response;
+        }).catch(function (e) {
+            throw new Error(e);
+        });
+    };
 };
 
 exports.default = Accountdatas;

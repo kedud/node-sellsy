@@ -27,4 +27,20 @@ export default class Accountdatas {
             throw new Error(e);
         });
     }
+
+    getRateCategory = (rcid) => {
+        return sellsy.api({
+            method: "Accountdatas.getRateCategory",
+            params: {
+                id: rcid,
+            },
+        }).then((data) => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            return data.response;
+        }).catch((e) => {
+            throw new Error(e);
+        });
+    }
 }
