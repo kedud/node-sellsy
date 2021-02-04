@@ -57,6 +57,21 @@ var Accountdatas = function Accountdatas(sellsy) {
         });
     };
 
+    this.getPayMediums = function () {
+        Accountdatas.getPayMediums;
+        return _this.sellsy.api({
+            method: "Accountdatas.getPayMediums",
+            params: {}
+        }).then(function (data) {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            return Object.values(data.response);
+        }).catch(function (e) {
+            throw new Error(e);
+        });
+    };
+
     this.sellsy = sellsy;
 };
 

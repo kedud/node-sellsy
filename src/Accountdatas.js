@@ -44,4 +44,19 @@ export default class Accountdatas {
             throw new Error(e);
         });
     }
+
+    getPayMediums = () => {
+        Accountdatas.getPayMediums
+        return this.sellsy.api({
+            method: "Accountdatas.getPayMediums",
+            params: {},
+        }).then((data) => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            return Object.values(data.response);
+        }).catch((e) => {
+            throw new Error(e);
+        });
+    }
 }
